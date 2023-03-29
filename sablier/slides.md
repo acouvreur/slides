@@ -38,12 +38,21 @@ Scale to zero
 layout: intro
 ---
 
-Alexis Couvreur
+# Alexis Couvreur
+Fullstack Software Engineer
+
+Working at the National Bank of Canada for SII Canada
+
+---
+layout: statement
+---
+
+# Reducing infrastructure costs boils down to turning apps off when you don’t use them
 
 ---
 layout: fact
 ---
-# Scale to zero?
+# Scaling to zero
 
 Scaling to zero allows workloads to be run only when there is demand
 
@@ -269,7 +278,7 @@ layout: two-cols
 
 ::right::
 
-<img src="/reverse-proxies-implem.png" class="m-40 h-40 rounded shadow" />
+<img src="/reverse-proxies-implem.png" />
 
 ---
 layout: statement
@@ -300,7 +309,12 @@ layout: statement
 ---
 
 # WebAssembly to the rescue
-WebAssembly (abbreviated Wasm) is a binary instruction format designed as a portable compilation target for programming languages, enabling deployment on the web for client and server applications.
+
+---
+layout: quote
+---
+
+# WebAssembly (abbreviated Wasm) is a binary instruction format designed as a portable compilation target for programming languages, enabling deployment on the web for client and server applications.
 
 ---
 
@@ -314,17 +328,31 @@ WebAssembly (abbreviated Wasm) is a binary instruction format designed as a port
 <img src="/webassembly.png" />
 
 ---
-layout: two-cols
+layout: statement
 ---
 
-# Proxy WASM
-
-- Proxy-Wasm is a set of ABI specifications
-  - L4/L7 proxies
-  - Extensions delivered as WebAssembly modules
-- First designed for **Envoy**
-- But other projects picked it up as the ABI spec for their WASM integration
+# ProxyWasm
+WebAssembly modules for reverse proxies
 
 ---
+layout: image
+image: /proxy-wasm.png
+---
 
-Any question?
+
+
+---
+layout: statement
+---
+
+# No more integration nightmare
+Create one WASM Module to be used by all reverse proxies
+
+Reverse proxy maintainers will have to develop and maintain one ProxyWasm extension
+
+---
+layout: statement
+---
+
+# Thank you!
+Questions?
