@@ -1,0 +1,18 @@
+services:
+  proxy:
+    image: caddy:local
+    ports:
+      - "8080:80"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+
+  whoami:
+    image: containous/whoami:v1.5.0
+    labels:
+      - sablier.enable=true
+      - sablier.group=demo
+  
+  sablier:
+    image: acouvreur/sablier:1.3.0
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock'

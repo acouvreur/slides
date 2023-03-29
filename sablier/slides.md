@@ -16,9 +16,16 @@ drawings:
 transition: slide-left
 ---
 
+<style>
+.sablier {
+  color: #ffd05b;
+  font-weight: bold;
+}
+</style>
+
 # Sablier
 
-Scale to Zero
+Scale to zero
 
 <div class="abs-br m-6 flex gap-2">
   <a href="https://github.com/acouvreur/sablier" target="_blank" alt="GitHub"
@@ -28,83 +35,23 @@ Scale to Zero
 </div>
 
 ---
-layout: image-right
-image: /sablier-github.png
+layout: intro
 ---
 
-# What is Sablier?
+Alexis Couvreur
 
-<style>
-.sablier {
-  color: #ffd05b;
-  font-weight: bold;
-  text-decoration: underline;
-}
-.strategy {
-  font-weight: bold;
-}
-.go {
-  color: #00ADD8
-}
-.description {
-  opacity: 0.8
-}
-.highlight {
-  font-weight: bold;
-  text-decoration: underline;
-}
-.features {
-  font-size: 1rem
-}
-</style>
-
-<p class="description">
-<span class="sablier">Sablier</span> is an API written in <span class="go">Go</span> to start containers for a given duration and <span class="highlight">scale to zero after a period of inactvity</span>
-</p>
-
-
-<v-clicks>
-
-### Features
-
-</v-clicks>
-
-<br/>
-<div class="features">
-
-<v-clicks>
-
-- 🔎 **Discovery** - find containers by labels/names
-  ```bash
-  docker run --label sablier.enable=true whoami
-  ```
-- 🛠 **Providers** - docker, swarm, kubernetes etc.
-- 💡**Strategies** - dynamic and blocking strategies
-- ⏳️**Session** - duration is extended after each call
-
-</v-clicks>
-</div>
 ---
-layout: image-right
-image: /cold-start.jpeg
+layout: fact
 ---
-
-<style>
-.subtitle {
-  color: #ffd05b;
-}
-</style>
-
 # Scale to zero?
 
-<v-clicks>
+Scaling to zero allows workloads to be run only when there is demand
 
-### 💲 <span class="subtitle">Market use cases</span>
+---
+layout: two-cols
+---
 
-</v-clicks>
-
-
-<v-clicks>
+# They scale to zero
 
 - Google Serverless (App Engine, Function)
 - AWS Lambda
@@ -112,67 +59,46 @@ image: /cold-start.jpeg
 - Github Codespace
 - And more!
 
-</v-clicks>
+::right::
 
-<br/>
-
-<v-clicks>
-
-### 🫵 <span class="subtitle">For you</span>
-
-</v-clicks>
-
-<v-clicks>
-
-- Reduce costs on the cloud
-  - QA environments rarely used 
-  - Forgotten deployed services
-- Selfhosting on low resources
-- Free and open source software alternative
-
-</v-clicks>
+<img src="/they-use-it.png" />
 
 ---
-
-#  With a waiting page (Dynamic strategy)
-
-<video controls>  
-  <source src="/dynamic-strategy-demo.mp4" type="video/mp4">
-</video>
-
+layout: fact
 ---
+# <span class="sablier">Sablier</span>
 
-# Hanging the request until the container is running
-
-<video controls>  
-  <source src="/blocking-strategy-demo.mp4" type="video/mp4">
-</video>
-
----
-layout: image
-image: /then-what.jpeg
----
-
-<style>
-h1 {
-
-}
-</style>
-
-# Then what?
+A free and open source software scaling to zero solution
 
 ---
 layout: statement
 ---
 
-# Reverse Proxy integration 
+# How does it work?
 
-<img src="/reverse-proxy-integration.bmp" />
+---
+layout: statement
+---
+
+# Reverse proxy integration
+
+<br/>
+<br/>
+
+<img src="/reverse-proxy-integration.png" />
+
+---
+layout: statement
+---
+
+# How to use <span class="sablier">Sablier</span>?
+Let's see its integration with Caddy!
 
 ---
 layout: two-cols
 transition: fade
 ---
+
 <style>
   .code-left {
     margin-right: 1rem
@@ -251,7 +177,6 @@ services:
 
 # Caddyfile
 
-
 ```nginx
 :80 {
 	route /whoami {
@@ -266,34 +191,116 @@ services:
 ```
 
 ---
+layout: statement
+---
 
-Demo time?
+# Demo
+
+---
+layout: statement
+---
+
+# <span class="sablier">Sablier</span> features
+
+---
+layout: two-cols
+---
+
+# Providers
+
+- Docker
+- Docker Swarm
+- Kubernetes
+- Podman
+- AWS EC2
+
+
+::right::
+
+<img src="/providers.png" />
+
+---
+layout: two-cols
+---
+
+# Label filtering
+
+- Docker labels
+- Docker swarm service labels
+- Kubernetes deployments labels
+
+::right::
+
+## Docker labels
+
+```yaml
+services:
+  whoami:
+    image: containous/whoami:v1.5.0
+    labels:
+      - sablier.enable=true
+      - sablier.group=mygroup
+```
+
+## Kubernetes deployments labels
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: whoami
+  labels:
+    app: whoami
+    sablier.enable: true
+    sablier.group: mygroup
+```
+
+---
+layout: two-cols
+---
+
+# Reverse proxies
+
+- Traefik (Go)
+- Caddy (Go)
+- Nginx (Javascript/Lua/C)
+- more to come...
+
+
+::right::
+
+<img src="/reverse-proxies-implem.png" class="m-40 h-40 rounded shadow" />
+
+---
+layout: statement
+---
+
+# Integration nightmare
+Develop and maintain an integration for each reverse proxy
 
 ---
 layout: image-right
 image: /reverse-proxies.png
 ---
-<style>
-.nightmare {
-  color: #d35721;
-  font-weight: bold;
-  text-decoration: underline;
-}
-</style>
 
-# <span class="nightmare">Integration nightmare</span>
+<v-clicks>
 
 - Different APIs
 - Different languages (Go, C, Javascript, Lua)
+  - Runtime plugin execution
+  - Compilation plugin (recompile the proxy)
 - Breaking changes
 - Provider compatibility
 - Cloud native
 
+</v-clicks>
+
 ---
-layout: image
+layout: statement
 ---
 
-<img src="/webassembly-logo.png" />
+# WebAssembly to the rescue
+WebAssembly (abbreviated Wasm) is a binary instruction format designed as a portable compilation target for programming languages, enabling deployment on the web for client and server applications.
 
 ---
 
@@ -307,20 +314,16 @@ layout: image
 <img src="/webassembly.png" />
 
 ---
+layout: two-cols
+---
 
-# Proxy WASM (WebAssembly)
+# Proxy WASM
 
 - Proxy-Wasm is a set of ABI specifications
   - L4/L7 proxies
   - Extensions delivered as WebAssembly modules
 - First designed for **Envoy**
 - But other projects picked it up as the ABI spec for their WASM integration
-
----
-
-# Bonus features
-
-- Custom theme
 
 ---
 

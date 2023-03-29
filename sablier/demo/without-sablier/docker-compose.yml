@@ -1,0 +1,10 @@
+services:
+  proxy:
+    image: caddy:2.6.4
+    ports:
+      - "8080:80"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+
+  whoami:
+    image: containous/whoami:v1.5.0
