@@ -1,0 +1,5 @@
+:80 {
+	route /whoami {
+		reverse_proxy whoami:80
+	}
+}

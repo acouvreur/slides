@@ -1,0 +1,7 @@
+:80 {
+	route /whoami {
+      sablier url=http://sablier:10000 group=demo session_duration=1m dynamic.display_name=Dynamic-Whoami
+
+	  reverse_proxy whoami:80
+	}
+}
